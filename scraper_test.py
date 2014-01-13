@@ -6,12 +6,15 @@ def scrape(url):
 	r = requests.get(url)
 	return r.status_code, r.text
 
-
 def read_lines(text):
-	for line in text.split('/n'):
-		print 'simon:'+line
+	lines = []
+	for line in text.split('\n'):
+		lines.append(line)
+	return lines
 
 def test_scraper():
 	status, text = scrape('http://elpaso.craigslist.org')
 	assert(status == 200)
-	read_lines(text)
+	lines = read_lines(text)
+	for line in lines:
+		print ">>>>>>>>>>>>>>>",line
