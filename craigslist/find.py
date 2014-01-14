@@ -34,7 +34,7 @@ def find(categories, keywords, cities, output):
 					_details = job.findtext('span[@class="l2"]/span[@class="pnr"]/small')
 		 			for keyword in keywords:
 		 				_title_match = keyword.upper() in _title.upper()
-		 				_details_match = keyword in _details.upper() if _details else False
+		 				_details_match = keyword.upper() in _details.upper() if _details else False
 		 				if _title_match or _details_match:
 		 					try:
 		 						if output == SCREEN_OUTPUT:
