@@ -3,6 +3,15 @@ import requests
 from lxml import html
 
 
+CITIES = ['boston', 'elpaso', 'lascruces', 'albuquerque', 'santafe', 'austin',
+          'sanantonio', 'dallas', 'tucson', 'atlanta', 'lasvegas', 'chicago',
+          'denver', 'detroit', 'houston', 'losangeles', 'miami', 'minneapolis',
+          'newyork', 'orangecounty', 'palmsprings', 'prescott', 'reno', 'sacramento',
+          'sandiego', 'sanluisobispo', 'seattle', 'sfbay', 'washingtondc']
+
+KEYWORDS = ['java']
+
+
 CRAIGSLIST_URL = 'http://{}.craigslist.org/sof'
 
 def scrape(url):
@@ -21,35 +30,16 @@ def read_lines(text):
 	return [line for line in text.split('\n')]
 
 def test_scraper():
-	cities = ['boston']
-	for city in cities:
+	for city in CITIES:
+		print "---------------------------------------------------------------------"
+		print 'Looking in {}'.format(city)
 		status, text = scrape(CRAIGSLIST_URL.format(city))
 		assert(status == 200)
 		tree = html.fromstring(text)
-		# print tree.xpath('//div[@class="content"]/h4/span/text()')
-		print tree.xpath('//p[@class="row"]/text()')
-		# lines = read_lines(text)
-		# for line in lines:
-		# 	if 'JAVA' in line:
-		# 		# idx = line.index('</a>')
-		# 		# print line[0:idx]
-		# 		print line
-
- # <p class="row" data-pid="4285756647"> 
- # 	<a href="/gbs/sof/4285756647.html" class="i"></a> 
- # 	<span class="star"></span> 
- # 	<span class="pl"> 
- # 		<span class="date">Jan 13</span>  
- # 			<a href="/gbs/sof/4285756647.html">
- # 				Back-End JAVA Web Platform Development 
- # 			</a> 
- # 		</span> 
- # 		<span class="l2">   
- # 		<span class="pnr"> 
- # 			<small> (Boston)</small> 
- # 			<span class="px"> 
- # 				<span class="p"> </span>
- # 			</span> 
- # 		</span>  
- # 	</span> 
- # </p>
+		jobs = tree.xpath('//p[@class="row"]/span[@class="pl"]/a/text()')
+		for job in jobs:
+		 	for keyword in KEYWORDS:
+		 		if  keyword.upper() in job.upper():
+		 			print '>>>{} : {}'.format(keyword, job)
+		 			break
+		
