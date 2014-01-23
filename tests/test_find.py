@@ -1,4 +1,3 @@
-import unittest
 import httpretty
 from xlist.find import find
 
