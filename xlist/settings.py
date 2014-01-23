@@ -1,3 +1,8 @@
+"""
+xlist settings
+"""
+
+
 CITIES = ['boston', 'elpaso', 'lascruces', 'albuquerque', 'santafe', 'austin',
           'sanantonio', 'dallas', 'tucson', 'atlanta', 'lasvegas', 'chicago',
           'denver', 'detroit', 'houston', 'losangeles', 'miami', 'minneapolis',
