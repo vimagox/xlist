@@ -1,13 +1,13 @@
-# mycraigslist
+# xlist
 
-mycraigslist - Find craigslist stuff in different cities
+xlist - Find craigslist stuff in different cities
 
 ## setup
 
-	pip install -r requirements.txt
+	pip install -r requirements.txt;pip install -r requirements_dev.txt;
 
 
-	installing lxml in ubuntu might require:
+	installing lxml in ubuntu requires:
 
 	"""
 	sudo apt-get install libxml2-dev libxslt-dev
@@ -16,18 +16,20 @@ mycraigslist - Find craigslist stuff in different cities
 
 ## usage
 
-craigslist has 1 command, find
+xlist command line currently supports 1 command, find
 
-find:
-	...../findjobs/craigslist$ python craigslist.py find -X sof -K java
-	...../findjobs/craigslist$ python craigslist.py find -X "sof,web" -K "java,python" -C boston
+
+Find by 1 category and 1 keyword:
+	python xlist.py find -X sof -K java
+
+Find by multiple categories and multiple keywords in a specific city:
+	python xlist.py find -X "sof,web" -K "clojure,node" -C boston
 
 
 Args:
 	-X, --categories	Craigslist categories (sof for software jobs - http://city.craigslist.org/sof)
 	-K, --keywords      Keywords/Search to look for; comma separated string.
 	-C, --cities		Specific cities to search
-	-O, --outpue		Desired output format; screen or html.
 
 
 -X and -K are required, other args are optional.

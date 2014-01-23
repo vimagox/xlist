@@ -1,12 +1,9 @@
+"""
+Command line tool to scrape and parse craigslist cities
+"""
 import argparse
-from find import find, SCREEN_OUTPUT, HTML_OUTPUT
-
-
-CITIES = ['boston', 'elpaso', 'lascruces', 'albuquerque', 'santafe', 'austin',
-          'sanantonio', 'dallas', 'tucson', 'atlanta', 'lasvegas', 'chicago',
-          'denver', 'detroit', 'houston', 'losangeles', 'miami', 'minneapolis',
-          'newyork', 'orangecounty', 'palmsprings', 'prescott', 'reno', 'sacramento',
-          'sandiego', 'seattle', 'sfbay', 'washingtondc']
+from find import find
+from settings import CITIES
 
 
 def create_main_parser():
@@ -29,19 +26,15 @@ def create_find_parser(subparsers):
     )
     parser_find.add_argument(
         '-X', '--categories', type=str, required=True,
-        help='Craigslist category (ie. "sof,web" - for software jobs - http://city.craigslist.org/category)'
+        help='Craigslist category (ie. "sof,web" - for software/web jobs - http://city.craigslist.org/category)'
     )    
     parser_find.add_argument(
         '-K', '--keywords', type=str, required=True,
-        help='Keywords to find (ie. "java,groovy")'
+        help='Keywords to search for (ie. "java,groovy")'
     )
     parser_find.add_argument(
         '-C', '--cities', type=str, required=False,
         help='Cities to search.'
-    )
-    parser_find.add_argument(
-        '-O', '--output', type=str, required=False,
-        help='Output results to screen or html; screen is used by default.'
     )
 
     return parser_find
@@ -61,10 +54,9 @@ def main():
         cats = _list(args.categories)
         keywords = _list(args.keywords)
         cities = _list(args.cities) if args.cities else CITIES
-        output = args.output or SCREEN_OUTPUT
         
         try:
-            find(cats, keywords, cities, output)
+            find(cats, keywords, cities)
         except KeyboardInterrupt:
             pass
 
