@@ -11,3 +11,9 @@ CITIES = ['boston', 'elpaso', 'lascruces', 'albuquerque', 'santafe', 'austin',
 
 
 CITY_URL = 'http://{}.craigslist.org/{}'
+
+
+USERS = {
+    'vato' :'simonese',
+    'admin':'simonese'
+}

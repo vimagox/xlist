@@ -28,6 +28,10 @@ class CityItems(object):
     def __str__(self):
         return '{} ({})'.format(self.city, self.cat)
 
+    def json(self):
+        return {'city': self.city, 'cat': self.cat,
+                'items': [i.__dict__ for i in self.items]}
+
 
 class Item(object):
     def __init__(self, date, title, link, keyword):
