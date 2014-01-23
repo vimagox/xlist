@@ -1,3 +1,6 @@
+"""
+services tests
+"""
 import httpretty
 from xlist.find import find
 

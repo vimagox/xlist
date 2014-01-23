@@ -1,17 +1,23 @@
 """
 xlist models
 """
+from settings import CITY_URL
+
 
 class CityItems(object):
     def __init__(self, city, cat):
         self.city = city
         self.cat = cat
         self.url = CITY_URL.format(city, cat)
-        self.items = []
+        self._items = []
 
     def add_item(self, item):
         item.link = self._build_item_link(item.link)
-        self.items.append(item)
+        self._items.append(item)
+
+    @property
+    def items(self):
+        return self._items
 
     def _build_item_link(self, value):
         if value.startswith('http'):

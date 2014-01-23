@@ -1,3 +1,6 @@
+"""
+scraper tests
+"""
 from xlist.scraper import HtmlScraper
 
 JOB_SAMPLE_HTML = 'tests/samples/job.html'
@@ -8,10 +11,9 @@ def test_parse_finding():
 	scraper = HtmlScraper(html_text)
 	assert(len(scraper.item_paths) == 1)
 
-
 	item_path = scraper.item_paths[0]
 	item = scraper.scrape_item(item_path, ['node'])
 	assert(item is not None)
 	assert(item.title == 'API Backend Node.js Software Developer  (allows remote)')
 	assert(item.date == 'Jan 13')
-	assert('/gbs/sof/4285320206.html' == item.link)
+	assert(item.link == '/gbs/sof/4285320206.html')
