@@ -24,8 +24,8 @@ def find_by_city(city, cat, keywords):
             if item:
                 print item
                 city_items.add_item(item)
-            else:
-                print 'ERROR: Invalid city: {}'.format(city)
+    else:
+        print 'ERROR: Invalid city: {}'.format(city)
     return city_items
 
 

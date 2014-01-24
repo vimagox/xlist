@@ -2,7 +2,7 @@
 services tests
 """
 import httpretty
-from xlist.find import find
+from xlist.services import find
 
 BOSTON_SAMPLE_HTML = 'tests/samples/boston.html'
 
@@ -20,7 +20,7 @@ def test_find_all():
     assert(len(results) == 1)
     assert(results[0].city == 'boston')
     assert(results[0].cat == 'sof')
-    assert(len(results[0].findings) == 4)
+    assert(len(results[0].items) == 4)
 
 @httpretty.activate
 def test_find_java():
@@ -28,7 +28,8 @@ def test_find_java():
     categories, cities, keywords = ['sof'], ['boston'], ['java']
     results = find(categories, keywords, cities)
     assert(len(results) == 1)
-    assert(len(results[0].findings) == 1)   
-    finding = results[0].findings[0]
-    assert(finding.title=='JAVA Developer ( (Boston near North and South Station))')
+    assert(len(results[0].items) == 1)   
+    finding = results[0].items[0]
+    print finding.title
+    assert(finding.title=='JAVA Developer  (Boston near North and South Station)')
     assert(finding.link=='http://boston.craigslist.org/gbs/sof/4286078333.html')
