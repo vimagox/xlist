@@ -2,7 +2,7 @@
 Command line tool to scrape and parse craigslist cities
 """
 import argparse
-from find import find
+from services import find
 from settings import CITIES
 
 

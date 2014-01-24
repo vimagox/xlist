@@ -29,7 +29,6 @@ def test_find_java():
     results = find(categories, keywords, cities)
     assert(len(results) == 1)
     assert(len(results[0].items) == 1)   
-    finding = results[0].items[0]
-    print finding.title
-    assert(finding.title=='JAVA Developer  (Boston near North and South Station)')
-    assert(finding.link=='http://boston.craigslist.org/gbs/sof/4286078333.html')
+    item = results[0].items[0]
+    assert(item.title=='JAVA Developer  (Boston near North and South Station)')
+    assert(item.link=='http://boston.craigslist.org/gbs/sof/4286078333.html')
