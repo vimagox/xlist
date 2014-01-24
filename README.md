@@ -33,3 +33,10 @@ Args:
 
 
 -X and -K are required, other args are optional.
+
+## REST Service
+
+xlist supports http GET to retrieve craigslist items:
+
+ie:
+    curl -u admin:simonese http://localhost:8080/boston/sof?key=python
