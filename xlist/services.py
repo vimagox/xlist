@@ -14,8 +14,8 @@ def find_by_city(city, cat, keywords):
     :param cat: category
     :param keywords: keywords
     """
-    print "--------------------------------------------------------"
-    city_items = CityItems(city, cat)
+    print('----------------------{}:{}-------------------------'.format(city, cat))
+    city_items = CityItems(city, cat, keywords)
     r = requests.get(city_items.url)
     if r.status_code == 200:
         scraper = HtmlScraper(r.text)

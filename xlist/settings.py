@@ -14,6 +14,7 @@ CITY_URL = 'http://{}.craigslist.org/{}'
 
 
 USERS = {
-    'vato' :'simonese',
-    'admin':'simonese'
+      'vato' :'simonese'
+    , 'admin':'simonese'
+    , 'admin': 'admin'
 }

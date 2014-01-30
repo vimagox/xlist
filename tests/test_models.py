@@ -5,7 +5,7 @@ from xlist.models import CityItems, Item
 
 
 def test_city_items():
-	city = CityItems('elpaso', 'sof')
+	city = CityItems('elpaso', 'sof', 'key1')
 	item = Item('Jan 13', 'Something here', '/abc/sof/xyz.html', 'something')
 	city.add_item(item)
 

@@ -5,9 +5,10 @@ from settings import CITY_URL
 
 
 class CityItems(object):
-    def __init__(self, city, cat):
+    def __init__(self, city, cat, keywords):
         self.city = city
         self.cat = cat
+        self.keywords = keywords
         self.url = CITY_URL.format(city, cat)
         self._items = []
 
@@ -29,8 +30,8 @@ class CityItems(object):
         return '{} ({})'.format(self.city, self.cat)
 
     def json(self):
-        return {'city': self.city, 'cat': self.cat,
-                'items': [i.__dict__ for i in self.items]}
+        return {'city': self.city, 'cat': self.cat, 'keywords': self.keywords,
+                'url': self.url, 'items': [i.__dict__ for i in self.items]}
 
 
 class Item(object):

@@ -24,7 +24,7 @@ def get_items(city, cat):
     try:
         keys = request.args.get('k', '').split(',')
         items = find_by_city(city, cat, keys)
-    	return jsonify({city: items.json()})
+    	return jsonify({'response': items.json()})
     except Exception, e:
         traceback.print_exc()
 
