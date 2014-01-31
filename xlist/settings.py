@@ -3,6 +3,9 @@ xlist settings
 """
 
 
+CITIES_URL = 'http://www.craigslist.org/about/sites#{}'
+
+
 CITIES = ['boston', 'elpaso', 'lascruces', 'albuquerque', 'santafe', 'austin',
           'sanantonio', 'dallas', 'tucson', 'atlanta', 'lasvegas', 'chicago',
           'denver', 'detroit', 'houston', 'losangeles', 'miami', 'minneapolis',

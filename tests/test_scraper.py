@@ -16,4 +16,4 @@ def test_parse_finding():
 	assert(item is not None)
 	assert(item.title == 'API Backend Node.js Software Developer  (allows remote)')
 	assert(item.date == 'Jan 13')
-	assert(item.link == '/gbs/sof/4285320206.html')
+	assert(item.url == '/gbs/sof/4285320206.html')

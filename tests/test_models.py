@@ -10,4 +10,4 @@ def test_city_items():
 	city.add_item(item)
 
 	assert(len(city.items)==1)
-	assert(city.items[0].link == 'http://elpaso.craigslist.org/abc/sof/xyz.html')
+	assert(city.items[0].url == 'http://elpaso.craigslist.org/abc/sof/xyz.html')

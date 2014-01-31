@@ -4,6 +4,30 @@ xlist models
 from settings import CITY_URL
 
 
+class City(object):
+    def __init__(self, name, url):
+        self.name = name
+        self.url = url
+
+
+class State(object):
+    def __init__(self, name, cities):
+        self.name = name
+        self.cities = cities
+
+    def json(self):
+        return [{'city':c.name, 'url':c.url} for c in self.cities]
+
+
+class Region(object):
+    def __init__(self, name, states):
+        self.name = name
+        self.states = states
+
+    def json(self):
+        return {s.name: s.json() for s in self.states}
+
+
 class CityItems(object):
     def __init__(self, city, cat, keywords):
         self.city = city
@@ -13,14 +37,14 @@ class CityItems(object):
         self._items = []
 
     def add_item(self, item):
-        item.link = self._build_item_link(item.link)
+        item.url = self._build_item_url(item.url)
         self._items.append(item)
 
     @property
     def items(self):
         return self._items
 
-    def _build_item_link(self, value):
+    def _build_item_url(self, value):
         if value.startswith('http'):
             return value
         prefix = self.url[0: -(len(self.cat)+1)]
@@ -35,10 +59,10 @@ class CityItems(object):
 
 
 class Item(object):
-    def __init__(self, date, title, link, keyword):
+    def __init__(self, date, title, url, keyword):
         self.date = date
         self.title = title
-        self.link = link
+        self.url = url
         self.keyword = keyword
 
     def __str__(self):

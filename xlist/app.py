@@ -5,14 +5,31 @@ import traceback
 import json
 from flask import Flask, jsonify, request
 from auth import auth
-from services import find, find_by_city
+from services import find, find_by_city, cities
 from settings import CITIES
 
 
 app = Flask(__name__, static_url_path='')
 
 
-@app.route('/<city>/<cat>', methods=['GET'])
+@app.route('/region/<region>/cities', methods=['GET'])
+@auth.login_required
+def get_cities(region):
+    """
+    List of craigslist cities
+
+    :statuscode 200: no error
+    :statuscode 403: invalid creds
+    """
+    try:
+        _cities = cities(region)
+        print _cities
+        return jsonify({'cities': _cities.json()})
+    except Exception, e:
+        traceback.print_exc()
+
+
+@app.route('/cities/<city>/<cat>', methods=['GET'])
 @auth.login_required
 def get_items(city, cat):
     """
