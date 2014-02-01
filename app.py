@@ -4,6 +4,7 @@ import sys
 import os
 from xlist.app import app
 
+
 def signal_handler(signal, frame):
     print 'Ctrl-c detected. App is going down!'
     sys.exit(0)

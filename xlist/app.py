@@ -6,7 +6,6 @@ import json
 from flask import Flask, jsonify, request
 from auth import auth
 from services import find, find_by_city, cities
-from settings import CITIES
 
 
 app = Flask(__name__, static_url_path='')
@@ -23,7 +22,6 @@ def get_cities(region):
     """
     try:
         _cities = cities(region)
-        print _cities
         return jsonify({'cities': _cities.json()})
     except Exception, e:
         traceback.print_exc()

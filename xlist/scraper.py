@@ -60,6 +60,8 @@ def _us(text):
 class CitiesScraper(object):
     def __init__(self, text):
         """
+        Scraper to find craigslist cities
+        :param text: html 
         """        
         self.tree = html.fromstring(_us(text))
         self.item_paths = self.tree.xpath(_STATE_PATH)
@@ -67,11 +69,11 @@ class CitiesScraper(object):
 
     def scrape_state(self, path):
         """
-        Scrapes state path
-        :returns: List of State objects.
+        Scrapes a state path
+        :returns: List of cities for the given state path.
         """
         cities = []
-        # print path.findtext('..h4')
+ 
         for li in path.xpath('li'):
             # print '>>>', li.findtext('a'), li.xpath('a/@href')[0]
             cities.append(City(li.findtext('a'), li.xpath('a/@href')[0]))

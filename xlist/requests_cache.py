@@ -30,7 +30,7 @@ def _cached_items(url, city, cat, cache_directory):
 def _cached_cities(url, region, cache_directory):
 	file_path = '{}/{}_cities.html'.format(cache_directory, region).lower()
 	if os.path.exists(file_path):
-		text = open(file_path, 'r').read
+		text = open(file_path, 'r').read()
 	else:
 		r = requests.get(url)
 		if r.status_code == 200:
