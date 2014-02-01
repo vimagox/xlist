@@ -2,22 +2,17 @@
 xlist settings
 """
 
-
-CITIES_URL = 'http://www.craigslist.org/about/sites#{}'
-
-
-CITIES = ['boston', 'elpaso', 'lascruces', 'albuquerque', 'santafe', 'austin',
-          'sanantonio', 'dallas', 'tucson', 'atlanta', 'lasvegas', 'chicago',
-          'denver', 'detroit', 'houston', 'losangeles', 'miami', 'minneapolis',
-          'newyork', 'orangecounty', 'palmsprings', 'prescott', 'reno', 'sacramento',
-          'sandiego', 'seattle', 'sfbay', 'washingtondc']
-
-
-CITY_URL = 'http://{}.craigslist.org/{}'
-
-
 USERS = {
       'vato' :'simonese'
     , 'admin':'simonese'
     , 'admin': 'admin'
 }
+
+
+CITIES_URL = 'http://www.craigslist.org/about/sites#{}'
+
+
+CITY_URL = 'http://{}.craigslist.org/{}'
+
+
+CACHE_DIRECTORY = './cache'

@@ -4,7 +4,7 @@ Functionality to find craigslist items by city and category
 from scraper import HtmlScraper, CitiesScraper
 from models import CityItems, Region
 from settings import CITIES_URL
-import requests
+from requests_cache import get
 
 
 def cities(region):
@@ -14,9 +14,9 @@ def cities(region):
     :returns region: Region instance
     """
     states = []
-    r = requests.get(CITIES_URL.format(region))
-    if r.status_code == 200:
-        scraper = CitiesScraper(r.text)
+    text = get(CITIES_URL.format(region))
+    if text:
+        scraper = CitiesScraper(text)
         for path in scraper.item_paths:
             state = scraper.scrape_state(path)
             states.append(state)
@@ -32,11 +32,11 @@ def find_by_city(city, cat, keywords):
     :param cat: category
     :param keywords: keywords
     """
-    print('----------------------{}:{}-------------------------'.format(city, cat))
+    print('--------{}:{}------'.format(city, cat))
     city_items = CityItems(city, cat, keywords)
-    r = requests.get(city_items.url)
-    if r.status_code == 200:
-        scraper = HtmlScraper(r.text)
+    text = get(city_items.url)
+    if text:
+        scraper = HtmlScraper(text)
         for path in scraper.item_paths:
             item = scraper.scrape_item(path, keywords)
             if item:
