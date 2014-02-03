@@ -14,9 +14,9 @@ Find craigslist stuff in different cities
 	sudo apt-get install python-lxml
 	"""
 
-### Usage
+## Usage
 
-## Comman line interface
+### Command line interface
 
 xlist command line currently supports 1 command, find
 
@@ -38,18 +38,18 @@ xlist command line currently supports 1 command, find
 
 	-X and -K are required, other args are optional.
 
-## REST Service
+### REST Service
 
 xlist supports http GET to retrieve craigslist items:
 
 
-# Retrieve craigslist cities:
+Retrieve craigslist cities:
 
 
 	curl -u admin:admin http://localhost:8080/region/us/cities
 
 
-# Retrieve items from a specific city/category:
+Retrieve items from a specific city/category:
 
 	
     curl -u admin:admin http://localhost:8080/boston/sof?k=python
