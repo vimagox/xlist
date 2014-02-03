@@ -29,7 +29,7 @@ Args:
 	-K, --keywords      Keywords/Search to look for; comma separated string.
 	-C, --cities		Specific cities to search
 
-	All arguments are required.
+All arguments are required.
 ```
 
 ### REST Service
@@ -45,12 +45,10 @@ curl -u admin:admin http://localhost:8080/region/us/cities
 ```
 
 Retrieve items from a specific city/category/keyword:
-
 ```	
 curl -u admin:admin http://localhost:8080/boston/sof?k=python
 
 k - Comma separated list of keywords
-c - Comma separated list of cities
 ```
 
 
