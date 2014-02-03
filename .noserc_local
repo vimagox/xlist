@@ -5,8 +5,7 @@ cover-erase = 1
 with-xunit = 1
 xunit-file = test_results/nosetests.xml
 verbosity = 3
-stop = 1
+cover-package=app
 
 cover-html = 1
 cover-html-dir = test_results/coverage
-

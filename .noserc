@@ -5,4 +5,4 @@ cover-erase = 1
 with-xunit = 1
 xunit-file = test_results/nosetests.xml
 verbosity = 2
-stop = 1
+cover-package=app

@@ -45,14 +45,25 @@ xlist supports http GET to retrieve craigslist items:
 
 Retrieve craigslist cities:
 
-
-	curl -u admin:admin http://localhost:8080/region/us/cities
+```
+curl -u admin:admin http://localhost:8080/region/us/cities
+```
 
 
 Retrieve items from a specific city/category:
 
-	
-    curl -u admin:admin http://localhost:8080/boston/sof?k=python
+```	
+curl -u admin:admin http://localhost:8080/boston/sof?k=python
 
-    k - Comma separated list of keywords
-    c - Comma separated list of cities
+k - Comma separated list of keywords
+c - Comma separated list of cities
+```
+
+
+### Testing
+
+```
+nosetests -c .noserc_local
+```
+
+Then check `test_results/coverage/index.html` for the HTML report.
