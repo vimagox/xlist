@@ -2,8 +2,7 @@
 Command line tool to scrape and parse craigslist cities
 """
 import argparse
-from services import find
-from settings import CITIES
+from xlist.services import find
 
 
 def create_main_parser():
@@ -33,7 +32,7 @@ def create_find_parser(subparsers):
         help='Keywords to search for (ie. "java,groovy")'
     )
     parser_find.add_argument(
-        '-C', '--cities', type=str, required=False,
+        '-C', '--cities', type=str, required=True,
         help='Cities to search.'
     )
 

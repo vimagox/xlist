@@ -21,37 +21,30 @@ Find craigslist stuff in different cities
 
 xlist command line currently supports 1 command, find
 
+```	
+python xlist.py find -X "sof,web" -K "python,javascript" -C boston
 
-	Find by 1 category and 1 keyword:
-	
-		python xlist.py find -X sof -K java
+Args:
+	-X, --categories	Craigslist categories (sof for software jobs - http://city.craigslist.org/sof)
+	-K, --keywords      Keywords/Search to look for; comma separated string.
+	-C, --cities		Specific cities to search
 
-	Find by multiple categories and multiple keywords in a specific city:
-		
-		python xlist.py find -X "sof,web" -K "clojure,node" -C boston
-
-
-	Args:
-		-X, --categories	Craigslist categories (sof for software jobs - http://city.craigslist.org/sof)
-		-K, --keywords      Keywords/Search to look for; comma separated string.
-		-C, --cities		Specific cities to search
-
-
-	-X and -K are required, other args are optional.
+	All arguments are required.
+```
 
 ### REST Service
 
-xlist supports http GET to retrieve craigslist items:
+Start the rest services
+```
+python app.py
+```
 
-
-Retrieve craigslist cities:
-
+Retrieve available craigslist cities
 ```
 curl -u admin:admin http://localhost:8080/region/us/cities
 ```
 
-
-Retrieve items from a specific city/category:
+Retrieve items from a specific city/category/keyword:
 
 ```	
 curl -u admin:admin http://localhost:8080/boston/sof?k=python
