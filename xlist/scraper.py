@@ -20,7 +20,7 @@ class HtmlScraper(object):
         """
         self.tree = html.fromstring(text)
         self.item_paths = self.tree.xpath(_ITEM_PATH)
-        print('found: {}'.format(len(self.item_paths)))
+        print('found: {} paths'.format(len(self.item_paths)))
 
     def scrape_item(self, path, keywords):
         """

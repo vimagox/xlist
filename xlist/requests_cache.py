@@ -1,6 +1,7 @@
 """
 requests cache
 """
+import traceback
 import os
 import re
 import requests
@@ -18,12 +19,16 @@ def _cached_items(url, city, cat, cache_directory):
 	if os.path.exists(file_path):
 		text = open(file_path, 'r').read()
 	else:
-		r = requests.get(url)
-		if r.status_code == 200:
-			text = r.text
-			_file = open(file_path, 'w')
-			_file.write(text)
-			_file.close()
+		try:
+			r = requests.get(url)
+			if r.status_code == 200:
+				text = r.text
+				_file = open(file_path, 'w')
+				_file.write(text.encode('ascii', 'ignore'))
+				_file.close()
+		except Exception, e:
+			print 'ERROR: {}'.format(url)
+			traceback.print_exc()
 	return text
 
 

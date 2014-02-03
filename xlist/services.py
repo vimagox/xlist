@@ -7,14 +7,20 @@ from settings import CITIES_URL
 from requests_cache import get
 
 
+_cache = {}
+
+
 def cities(region):
     """
     Provide craigslist cities for the given region
     :param region: region
     :returns region: Region instance
     """
+    if region in _cache:
+        return _cache[region]
+
     states = []
-    text = get(CITIES_URL.format(region))
+    text = get(CITIES_URL.format(region)) 
     if text:
         scraper = CitiesScraper(text)
         for path in scraper.item_paths:
@@ -22,7 +28,9 @@ def cities(region):
             states.append(state)
     else:
         print 'ERROR: Invalid city: {}'.format(city)
-    return Region(region, states)
+    r = Region(region, states)
+    _cache[region] = r
+    return r
 
 
 def find_by_city(city, cat, keywords):

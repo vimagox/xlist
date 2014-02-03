@@ -3,8 +3,7 @@ xlist settings
 """
 
 USERS = {
-      'vato' :'simonese'
-    , 'admin':'simonese'
+      'vato' :'vato'
     , 'admin': 'admin'
 }
 
