@@ -17,7 +17,7 @@ def _setup_mock_responses():
 
 
 @httpretty.activate
-def test_cli():
+def xtest_cli():
     _setup_mock_responses()
 
     text = os.popen("python xlist.py find -X sof -K java -C boston").read()
