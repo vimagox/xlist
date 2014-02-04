@@ -9,6 +9,27 @@ import datetime
 from settings import CACHE_DIRECTORY
 
 
+def _read(url):
+	print ">>>>>>>>>>>>>>>>>>>>>>>>>", url
+	try:
+		r = requests.get(url)
+		if r.status_code == 200:
+			return r.text
+		return None
+	except Exception, e:
+		print 'ERROR: {}'.format(url)
+		traceback.print_exc()
+
+
+def _save(file_path, text):
+	if text:
+		_file = open(file_path, 'w')
+		_file.write(text.encode('ascii', 'ignore'))
+		_file.close()
+	else:
+		raise Exception('Unable to save {} - empty text'.format(file_path))
+
+
 def _cached_items(url, city, cat, cache_directory):
 	directory = '{}/{}'.format(cache_directory, datetime.date.today())
 	if not os.path.exists(directory):
@@ -19,16 +40,9 @@ def _cached_items(url, city, cat, cache_directory):
 	if os.path.exists(file_path):
 		text = open(file_path, 'r').read()
 	else:
-		try:
-			r = requests.get(url)
-			if r.status_code == 200:
-				text = r.text
-				_file = open(file_path, 'w')
-				_file.write(text.encode('ascii', 'ignore'))
-				_file.close()
-		except Exception, e:
-			print 'ERROR: {}'.format(url)
-			traceback.print_exc()
+		text = _read(url)
+		if text:
+			_save(file_path, text)
 	return text
 
 
@@ -38,12 +52,9 @@ def _cached_cities(url, region, cache_directory):
 	if os.path.exists(file_path):
 		text = open(file_path, 'r').read()
 	else:
-		r = requests.get(url)
-		if r.status_code == 200:
-			text = r.text
-			_file = open(file_path, 'w')
-			_file.write(text)
-			_file.close()
+		text = _read(url)
+		if text:
+			_save(file_path, text)
 	return text
 
 

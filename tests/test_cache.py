@@ -28,35 +28,32 @@ def _clean_dir(directory):
         else:
             shutil.rmtree(f)
 
-
-class CacheTest(unittest.TestCase):
-    def setUp(self):
-        _clean_cache()
-        httpretty.register_uri(httpretty.GET, 
-                           SAMPLE_CITY_URL,
-                           body=open(BOSTON_HTML, 'r').read(),
+def _setup_mock_response(url, file_path):
+    httpretty.register_uri(httpretty.GET, 
+                           url,
+                           body=open(file_path, 'r').read(),
                            content_type="text/html")
-        httpretty.register_uri(httpretty.GET, 
-                           CITIES_URL,
-                           body=open(CITIES_HTML, 'r').read(),
-                           content_type="text/html")        
 
-    def tearDown(self):
-        _clean_cache()
+@httpretty.activate
+def test_get_items():
+    _clean_cache()
+    _setup_mock_response(SAMPLE_CITY_URL, BOSTON_HTML)
+    directory = '{}/{}'.format(CACHE_DIRECTORY, datetime.date.today())
+    assert(os.path.exists(directory) == False)
+    text = get(SAMPLE_CITY_URL, cache_directory=CACHE_DIRECTORY)
+    assert(text is not None)
+    assert(os.path.exists(directory) == True)
+    assert(os.path.exists('{}/boston-sof.html'.format(directory)) == True)
+    _clean_cache()
 
-    @httpretty.activate
-    def test_get_items(self):
-        directory = '{}/{}'.format(CACHE_DIRECTORY, datetime.date.today())
-        assert(os.path.exists(directory) == False)
-        text = get(SAMPLE_CITY_URL, cache_directory=CACHE_DIRECTORY)
-        assert(text is not None)
-        assert(os.path.exists(directory) == True)
-        assert(os.path.exists('{}/boston-sof.html'.format(directory)) == True)
 
-    @httpretty.activate
-    def test_get_cities(self):
-        cities_file = '{}/us_cities.html'.format(CACHE_DIRECTORY)
-        assert(os.path.exists(cities_file) == False)
-        text = get(CITIES_URL, cache_directory=CACHE_DIRECTORY)
-        assert(text is not None)
-        assert(os.path.exists(cities_file) == True)
+@httpretty.activate
+def test_get_cities():
+    _clean_cache()
+    _setup_mock_response(CITIES_URL, CITIES_HTML)
+    cities_file = '{}/us_cities.html'.format(CACHE_DIRECTORY)
+    assert(os.path.exists(cities_file) == False)
+    text = get(CITIES_URL, cache_directory=CACHE_DIRECTORY)
+    assert(text is not None)
+    assert(os.path.exists(cities_file) == True)
+    _clean_cache()
