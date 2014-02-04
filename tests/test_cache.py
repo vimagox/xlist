@@ -3,13 +3,17 @@ import glob
 import os
 import shutil
 import datetime
+import httpretty
 
 from xlist.requests_cache import get
 
 
 SAMPLE_CITY_URL = 'http://boston.craigslist.org/sof'
 CITIES_URL =  'http://www.craigslist.org/about/sites#US'
-CACHE_DIRECTORY = './cache'
+CACHE_DIRECTORY = './tests/cache'
+
+BOSTON_HTML = 'tests/samples/boston.html'
+CITIES_HTML = 'tests/samples/us.html'
 
 
 def _clean_cache():
@@ -28,10 +32,19 @@ def _clean_dir(directory):
 class CacheTest(unittest.TestCase):
     def setUp(self):
         _clean_cache()
+        httpretty.register_uri(httpretty.GET, 
+                           SAMPLE_CITY_URL,
+                           body=open(BOSTON_HTML, 'r').read(),
+                           content_type="text/html")
+        httpretty.register_uri(httpretty.GET, 
+                           CITIES_URL,
+                           body=open(CITIES_HTML, 'r').read(),
+                           content_type="text/html")        
 
     def tearDown(self):
         _clean_cache()
 
+    @httpretty.activate
     def test_get_items(self):
         directory = '{}/{}'.format(CACHE_DIRECTORY, datetime.date.today())
         assert(os.path.exists(directory) == False)
@@ -40,6 +53,7 @@ class CacheTest(unittest.TestCase):
         assert(os.path.exists(directory) == True)
         assert(os.path.exists('{}/boston-sof.html'.format(directory)) == True)
 
+    @httpretty.activate
     def test_get_cities(self):
         cities_file = '{}/us_cities.html'.format(CACHE_DIRECTORY)
         assert(os.path.exists(cities_file) == False)
