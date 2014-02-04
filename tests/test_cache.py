@@ -17,8 +17,7 @@ CITIES_HTML = 'tests/samples/us.html'
 
 
 def _clean_cache():
-    if os.path.exists(CACHE_DIRECTORY):
-        _clean_dir(CACHE_DIRECTORY)
+    _clean_dir(CACHE_DIRECTORY)
 
 def _clean_dir(directory):
     files = glob.glob('{}/*'.format(directory))
