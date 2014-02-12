@@ -2,7 +2,9 @@
 Command line tool to scrape and parse craigslist cities
 """
 import argparse
-from xlist.services import find
+from xlist.cache import Cache
+from xlist.services import XlistService
+from xlist.settings import CACHE_DIRECTORY
 
 
 def create_main_parser():
@@ -35,6 +37,10 @@ def create_find_parser(subparsers):
         '-C', '--cities', type=str, required=True,
         help='Cities to search.'
     )
+    parser_find.add_argument(
+        '-T', '--test', type=str, required=True,
+        help='For testing purposes.'
+    )
 
     return parser_find
 
@@ -55,9 +61,26 @@ def main():
         cities = _list(args.cities) if args.cities else CITIES
         
         try:
-            find(cats, keywords, cities)
+            _requests = None
+            if args.test:
+                _requests = RequestMock(args.test)
+            else:
+                _requests = Cache(CACHE_DIRECTORY)
+            service = XlistService(_requests)
+            service.find(cats, keywords, cities)
         except KeyboardInterrupt:
             pass
+
+
+class RequestMock(object):
+    """
+    Only used for testing command line interface
+    """
+    def __init__(self, path):
+        self.path = path
+
+    def get(self, url):
+        return open(self.path, 'r').read()
 
 
 if __name__ == '__main__':

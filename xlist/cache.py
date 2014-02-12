@@ -6,11 +6,9 @@ import os
 import re
 import requests
 import datetime
-from settings import CACHE_DIRECTORY
 
 
 def _read(url):
-	print ">>>>>>>>>>>>>>>>>>>>>>>>>", url
 	try:
 		r = requests.get(url)
 		if r.status_code == 200:
@@ -58,12 +56,16 @@ def _cached_cities(url, region, cache_directory):
 	return text
 
 
-def get(url, cache_directory=CACHE_DIRECTORY):
-	match = re.search(r"http://www.craigslist.org/about/sites#(\S*)", url)
-	if match:
-		return _cached_cities(url, match.groups()[0], cache_directory)
-	match = re.search(r"http://(\S*).craigslist.org/(\S*)", url)
-	if match:
-		city, cat = match.groups()[0], match.groups()[1]
-		return _cached_items(url, city, cat, cache_directory)
-	return None
+class Cache(object):
+	def __init__(self, cache_directory):
+		self.cache_directory = cache_directory
+
+	def get(self, url):
+		match = re.search(r"http://www.craigslist.org/about/sites#(\S*)", url)
+		if match:
+			return _cached_cities(url, match.groups()[0], self.cache_directory)
+		match = re.search(r"http://(\S*).craigslist.org/(\S*)", url)
+		if match:
+			city, cat = match.groups()[0], match.groups()[1]
+			return _cached_items(url, city, cat, self.cache_directory)
+		return None

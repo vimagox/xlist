@@ -67,3 +67,10 @@ class Item(object):
 
     def __str__(self):
         return '[{}] {}: {}'.format(self.date, self.keyword, self.title)
+
+
+class Category(object):
+    def __init__(self, name, url, items=[]):        
+        self.name = name
+        self.url =url
+        self.items = items

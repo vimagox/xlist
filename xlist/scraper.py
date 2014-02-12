@@ -1,11 +1,14 @@
 import requests
 from lxml import html
 from settings import CITY_URL
-from models import Item, City, State
+from models import Item, City, State, Category
 
 
 _STATE_PATH = '//parent::ul'
 _ITEM_PATH = '//p[@class="row"]'
+_CATEGORY_PATH = '//div[@class="col"]'
+_CATEGORY_NAME_PATH = 'h4/a'
+_CATEGORY_URL_PATH = 'h4/a/@href'
 _DATE_PATH = 'span[@class="pl"]/span[@class="date"]'
 _TITLE_PATH = 'span[@class="pl"]/a'
 _URL_PATH = 'span[@class="pl"]/a/@href'
@@ -78,3 +81,27 @@ class CitiesScraper(object):
             # print '>>>', li.findtext('a'), li.xpath('a/@href')[0]
             cities.append(City(li.findtext('a'), li.xpath('a/@href')[0]))
         return State(path.findtext('..h4'), cities)
+
+
+class CategoriesScraper(object):
+    def __init__(self, text):
+        """
+        Scrapes a craigslist city to find categories
+        :param text: html         
+        """
+        self.tree = html.fromstring(text)
+        self.item_paths = self.tree.xpath(_CATEGORY_PATH)
+
+    def scrape_category(self, path):
+        _name = path.findtext(_CATEGORY_NAME_PATH)
+        _url = path.xpath(_CATEGORY_URL_PATH)
+        if _url:
+            items = []
+            print "    'name':'{}', 'url':'{}', 'cats':".format(_name, _url[0])
+            for li in path.xpath('div/ul/li'):
+                _li_name = li.findtext('a').encode('ascii', 'ignore').strip()
+                _li_url = li.xpath('a/@href')[0].encode('ascii', 'ignore').strip()
+                print "        'name':'{}', 'url':'{}',".format(_li_name, _li_url)
+                items.append(Category(_li_name, _li_url))
+            return Category(_name, _url, items)
+        return None

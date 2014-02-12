@@ -5,13 +5,33 @@ import traceback
 import json
 from flask import Flask, jsonify, request
 from auth import auth
-from services import find, find_by_city, cities
+from services import XlistService
+from cache import Cache
+from settings import CACHE_DIRECTORY
 
 
 app = Flask(__name__, static_url_path='')
+cache = Cache(CACHE_DIRECTORY)
+service = XlistService(cache)
 
 
-@app.route('/region/<region>/cities', methods=['GET'])
+@app.route('/categories', methods=['GET'])
+@auth.login_required
+def get_categories():
+    """
+    List of craigslist categories
+
+    :statuscode 200: no error
+    :statuscode 403: invalid creds
+    """
+    try:
+        _cats = service.categories()
+        return jsonify({'categories': _cats})
+    except Exception, e:
+        traceback.print_exc()
+
+
+@app.route('/<region>/cities', methods=['GET'])
 @auth.login_required
 def get_cities(region):
     """
@@ -21,7 +41,7 @@ def get_cities(region):
     :statuscode 403: invalid creds
     """
     try:
-        _cities = cities(region)
+        _cities = service.cities(region)
         return jsonify({'cities': _cities.json()})
     except Exception, e:
         traceback.print_exc()
@@ -38,7 +58,7 @@ def get_items(city, cat):
     """
     try:
         keys = request.args.get('k', '').split(',')
-        items = find_by_city(city, cat, keys)
+        items = service.find_by_city(city, cat, keys)
     	return jsonify({'response': items.json()})
     except Exception, e:
         traceback.print_exc()
