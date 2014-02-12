@@ -5,7 +5,7 @@ import shutil
 import datetime
 import httpretty
 
-from xlist.requests_cache import get
+from xlist.cache import Cache
 
 
 SAMPLE_CITY_URL = 'http://boston.craigslist.org/sof'
@@ -14,6 +14,9 @@ CACHE_DIRECTORY = './tests/cache'
 
 BOSTON_HTML = 'tests/samples/boston.html'
 CITIES_HTML = 'tests/samples/us.html'
+
+
+cache = Cache(CACHE_DIRECTORY)
 
 
 def _clean_cache():
@@ -39,10 +42,10 @@ def test_get_items():
     _setup_mock_response(SAMPLE_CITY_URL, BOSTON_HTML)
     directory = '{}/{}'.format(CACHE_DIRECTORY, datetime.date.today())
     assert(os.path.exists(directory) == False)
-    text = get(SAMPLE_CITY_URL, cache_directory=CACHE_DIRECTORY)
+    text = cache.get(SAMPLE_CITY_URL)
     assert(text is not None)
     assert(os.path.exists(directory) == True)
-    assert(os.path.exists('{}/boston-sof.html'.format(directory)) == True)
+    assert(os.path.exists('{}/sof/boston.html'.format(directory)) == True)
     _clean_cache()
 
 
@@ -52,7 +55,7 @@ def test_get_cities():
     _setup_mock_response(CITIES_URL, CITIES_HTML)
     cities_file = '{}/us_cities.html'.format(CACHE_DIRECTORY)
     assert(os.path.exists(cities_file) == False)
-    text = get(CITIES_URL, cache_directory=CACHE_DIRECTORY)
+    text = cache.get(CITIES_URL)
     assert(text is not None)
     assert(os.path.exists(cities_file) == True)
     _clean_cache()

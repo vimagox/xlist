@@ -29,10 +29,10 @@ def _save(file_path, text):
 
 
 def _cached_items(url, city, cat, cache_directory):
-	directory = '{}/{}'.format(cache_directory, datetime.date.today())
+	directory = '{}/{}/{}'.format(cache_directory, datetime.date.today(), cat)
 	if not os.path.exists(directory):
 		os.makedirs(directory)	
-	file_name = '{}-{}.html'.format(city, cat)
+	file_name = '{}.html'.format(city)
 	file_path = '{}/{}'.format(directory, file_name).lower()
 	text = None
 	if os.path.exists(file_path):
