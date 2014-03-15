@@ -103,5 +103,6 @@ class CategoriesScraper(object):
                 _li_url = li.xpath('a/@href')[0].encode('ascii', 'ignore').strip()
                 print "        'name':'{}', 'url':'{}',".format(_li_name, _li_url)
                 items.append(Category(_li_name, _li_url))
+            print _url, _url.replace('/', '')
             return Category(_name, _url, items)
         return None

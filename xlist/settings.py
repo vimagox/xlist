@@ -18,22 +18,22 @@ CACHE_DIRECTORY = './cache'
 
 
 CATEGORIES = [
-    { 'name':'community', 'url':'ccc/', 'categories':[
-        {'name':'activities', 'url':'act/'},
-        {'name':'artists', 'url':'ats/'},
-        {'name':'childcare', 'url':'kid/'},
-        {'name':'general', 'url':'com/'},
-        {'name':'groups', 'url':'grp/'},
-        {'name':'pets', 'url':'pet/'},
-        {'name':'events', 'url':'eve/'},
-        {'name':'lost+found', 'url':'laf/'},
-        {'name':'musicians', 'url':'muc/'},
-        {'name':'localnews', 'url':'vnn/'},
-        {'name':'politics', 'url':'pol/'},
-        {'name':'rideshare', 'url':'rid/'},
-        {'name':'volunteers', 'url':'vol/'},
-        {'name':'classes', 'url':'cls/'}]},
-    { 'name':'discussion forums', 'url':'/forums', 'categories':[
+    { 'name':'community', 'url':'ccc', 'categories':[
+        {'name':'activities', 'url':'act'},
+        {'name':'artists', 'url':'ats'},
+        {'name':'childcare', 'url':'kid'},
+        {'name':'general', 'url':'com'},
+        {'name':'groups', 'url':'grp'},
+        {'name':'pets', 'url':'pet'},
+        {'name':'events', 'url':'eve'},
+        {'name':'lost+found', 'url':'laf'},
+        {'name':'musicians', 'url':'muc'},
+        {'name':'localnews', 'url':'vnn'},
+        {'name':'politics', 'url':'pol'},
+        {'name':'rideshare', 'url':'rid'},
+        {'name':'volunteers', 'url':'vol'},
+        {'name':'classes', 'url':'cls'}]},
+    { 'name':'forums', 'url':'forums', 'categories':[
         {'name':'adopt', 'url':'/forums/?forumID=2232'},
         {'name':'apple', 'url':'/forums/?forumID=3232'},
         {'name':'arts', 'url':'/forums/?forumID=49'},
@@ -103,7 +103,7 @@ CATEGORIES = [
         {'name':'words', 'url':'/forums/?forumID=7000'},
         {'name':'writing', 'url':'/forums/?forumID=27'},
         {'name':'yoga', 'url':'/forums/?forumID=8620'}]},
-    {'name':'housing', 'url':'hhh/', 'categories':[
+    {'name':'housing', 'url':'hhh', 'categories':[
         {'name':'apts / housing', 'url':'apa/'},
         {'name':'rooms / shared', 'url':'roo/'},
         {'name':'sublets / temporary', 'url':'sub/'},
@@ -113,7 +113,7 @@ CATEGORIES = [
         {'name':'parking / storage', 'url':'prk/'},
         {'name':'office / commercial', 'url':'off/'},
         {'name':'real estate for sale', 'url':'rea/'}]},
-    {'name':'for sale', 'url':'sss/', 'categories':[
+    {'name':'for sale', 'url':'sss', 'categories':[
         {'name':'antiques', 'url':'ata/'},
         {'name':'baby+kid', 'url':'baa/'},
         {'name':'barter', 'url':'bar/'},
@@ -152,7 +152,7 @@ CATEGORIES = [
         {'name':'photo+video', 'url':'pha/'},
         {'name':'toys+games', 'url':'taa/'},
         {'name':'video gaming', 'url':'vga/'}]},
-    { 'name':'services', 'url':'bbb/', 'categories':[
+    { 'name':'services', 'url':'bbb', 'categories':[
         {'name':'beauty', 'url':'bts/'},
         {'name':'creative', 'url':'crs/'},
         {'name':'computer', 'url':'cps/'},
@@ -173,7 +173,7 @@ CATEGORIES = [
         {'name':'therapeutic', 'url':'thp/'},
         {'name':'travel/vac', 'url':'trv/'},
         {'name':'write/ed/tr8', 'url':'wet/'}]},
-    { 'name':'jobs', 'url':'jjj/', 'categories':[
+    { 'name':'jobs', 'url':'jjj', 'categories':[
         {'name':'accounting+finance', 'url':'acc/'},
         {'name':'admin / office', 'url':'ofc/'},
         {'name':'arch / engineering', 'url':'egr/'},
@@ -207,7 +207,7 @@ CATEGORIES = [
         {'name':'writing / editing', 'url':'wri/'},
         {'name':'[ETC]', 'url':'etc/'},
         {'name':'[ part-time ]', 'url':'/search/jjj?addFour=part-time'}]},
-    { 'name':'gigs', 'url':'ggg/', 'categories':[
+    { 'name':'gigs', 'url':'ggg', 'categories':[
         {'name':'crew', 'url':'cwg/'},
         {'name':'event', 'url':'evg/'},
         {'name':'labor', 'url':'lbg/'},

@@ -4,7 +4,7 @@ Functionality to find craigslist items by city and category
 from scraper import HtmlScraper, CitiesScraper
 from models import CityItems, Region
 from settings import CITIES_URL, CATEGORIES as _categories
-
+import time
 
 _cache = {}
 
@@ -12,9 +12,15 @@ _cache = {}
 class XlistService(object):
     def __init__(self, request_api):
         self.xrequests = request_api
+        self.xcategories = None
 
     def categories(self):
-        return _categories
+        ts = time.time()
+        if 'categories' not in _cache:
+            _cache['categories'] = _categories
+        te = time.time() - ts
+        print ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", te
+        return _cache['categories']
 
     def cities(self, region):
         """
