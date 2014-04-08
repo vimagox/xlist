@@ -1,7 +1,6 @@
-xlist
-=====
-Find craigslist stuff in different cities
-
+xmunicipio-services
+===================
+backend services for xmunicipio
 
 ## setup
 
@@ -15,43 +14,6 @@ Find craigslist stuff in different cities
 	sudo apt-get install python-lxml
 	"""
 
-## Usage
-
-### Command line interface
-
-xlist command line currently supports 1 command, find
-
-```	
-python xlist.py find -X "sof,web" -K "python,javascript" -C boston
-
-Args:
-	-X, --categories	Craigslist categories (sof for software jobs - http://city.craigslist.org/sof)
-	-K, --keywords      Keywords/Search to look for; comma separated string.
-	-C, --cities		Specific cities to search
-
-All arguments are required.
-```
-
-### REST Service
-
-Start the rest services
-```
-python app.py
-```
-
-Retrieve available craigslist cities
-```
-curl -u admin:admin http://localhost:8080/region/us/cities
-```
-
-Retrieve items from a specific city/category/keyword:
-```	
-curl -u admin:admin http://localhost:8080/boston/sof?k=python
-
-k - Comma separated list of keywords
-```
-
-
 ### Testing
 
 ```
@@ -59,3 +21,10 @@ nosetests -c .noserc_local
 ```
 
 Then check `test_results/coverage/index.html` for the HTML report.
+
+
+### Capture test data
+
+```	
+curl http://es.wikipedia.org/wiki/Anexo:Municipios_de_Aguascalientes > tests/samples/aguascalientes.html
+```
