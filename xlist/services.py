@@ -54,7 +54,7 @@ class XlistService(object):
         print('--------{}:{}------'.format(city, cat))
         city_items = CityItems(city, cat, keywords)
         text = self.xrequests.get(city_items.url)
-        if text:
+        if text:            
             scraper = HtmlScraper(text)
             for path in scraper.item_paths:
                 item = scraper.scrape_item(path, keywords)

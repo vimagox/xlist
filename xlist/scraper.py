@@ -9,10 +9,10 @@ _ITEM_PATH = '//p[@class="row"]'
 _CATEGORY_PATH = '//div[@class="col"]'
 _CATEGORY_NAME_PATH = 'h4/a'
 _CATEGORY_URL_PATH = 'h4/a/@href'
-_DATE_PATH = 'span[@class="pl"]/span[@class="date"]'
-_TITLE_PATH = 'span[@class="pl"]/a'
-_URL_PATH = 'span[@class="pl"]/a/@href'
-_DETAILS_PATH = 'span[@class="l2"]/span[@class="pnr"]/small'
+_DATE_PATH = 'span[@class="txt"]/span[@class="pl"]/time'
+_TITLE_PATH = 'span[@class="txt"]/span[@class="pl"]/a'
+_URL_PATH = 'span[@class="txt"]/span[@class="pl"]/a/@href'
+_DETAILS_PATH = 'span[@class="txt"]/span[@class="l2"]/span[@class="pnr"]/small'
 
 
 class HtmlScraper(object):

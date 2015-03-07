@@ -15,5 +15,5 @@ def test_parse_finding():
 	item = scraper.scrape_item(item_path, ['node'])
 	assert(item is not None)
 	assert(item.title == 'API Backend Node.js Software Developer  (allows remote)')
-	assert(item.date == 'Jan 13')
+	assert(item.date == 'Mar 6')
 	assert(item.url == '/gbs/sof/4285320206.html')

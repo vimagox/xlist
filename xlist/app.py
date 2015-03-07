@@ -16,7 +16,7 @@ service = XlistService(cache)
 
 
 @app.route('/categories', methods=['GET'])
-@auth.login_required
+# @auth.login_required
 def get_categories():
     """
     List of craigslist categories
@@ -32,7 +32,7 @@ def get_categories():
 
 
 @app.route('/<region>/cities', methods=['GET'])
-@auth.login_required
+# @auth.login_required
 def get_cities(region):
     """
     List of craigslist cities
@@ -48,7 +48,7 @@ def get_cities(region):
 
 
 @app.route('/cities/<city>/<cat>', methods=['GET'])
-@auth.login_required
+# @auth.login_required
 def get_items(city, cat):
     """
     List of craigslist items
